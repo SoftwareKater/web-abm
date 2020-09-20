@@ -8,8 +8,6 @@ import { InitialValues } from 'ngx-abm';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'prisoners-dilemma';
-
   public params: InitialValues;
   public results: any;
 

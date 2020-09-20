@@ -1,0 +1,53 @@
+dist: trusty
+os: linux
+
+language: node_js
+node_js:
+  - "10"
+
+branches:
+  only:
+    - develop
+    - master
+
+notifications:
+  email: false
+
+addons:
+  chrome: stable
+
+cache:
+  directories:
+    - ./node_modules
+
+install:
+  - npm install
+
+jobs:
+  include:
+  - stage: lint
+    script:
+    - npm run lint
+  - stage: test
+    script:
+    - npm run test:ngx-abm
+    # - npm run test:lib-coverage
+    # - npm run report-coverage:lib
+  - stage: build & publish app
+    script:
+    - npm run build:all
+    before_deploy:
+    - cp dist/prisoners-dilemma/index.html dist/prisoners-dilemma/404.html
+    deploy:
+      provider: pages
+      strategy: git
+      cleanup: false
+      github_token: $GITHUB_TOKEN
+      local_dir: dist/prisoners-dilemma
+      on:
+        branch: master
+  # - stage: build & publish lib
+  #   script:
+  #   - npm run build:lib
+  #   - npm run publish:lib
+  #   if: branch = master

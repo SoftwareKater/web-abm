@@ -129,4 +129,4 @@ export const allStrategies = [
   new Strategy1Strategy(),
   new Strategy2Strategy(),
   new TitForTatStrategy(),
-]
+];
