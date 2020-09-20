@@ -2,5 +2,167 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "ngx-abm": {
+      "projectType": "library",
+      "root": "projects/ngx-abm",
+      "sourceRoot": "projects/ngx-abm/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-abm/tsconfig.lib.json",
+            "project": "projects/ngx-abm/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-abm/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-abm/src/test.ts",
+            "tsConfig": "projects/ngx-abm/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-abm/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-abm/tsconfig.lib.json",
+              "projects/ngx-abm/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "prisoners-dilemma": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/prisoners-dilemma",
+      "sourceRoot": "projects/prisoners-dilemma/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/prisoners-dilemma",
+            "index": "projects/prisoners-dilemma/src/index.html",
+            "main": "projects/prisoners-dilemma/src/main.ts",
+            "polyfills": "projects/prisoners-dilemma/src/polyfills.ts",
+            "tsConfig": "projects/prisoners-dilemma/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/prisoners-dilemma/src/favicon.ico",
+              "projects/prisoners-dilemma/src/assets"
+            ],
+            "styles": [
+              "projects/prisoners-dilemma/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/prisoners-dilemma/src/environments/environment.ts",
+                  "with": "projects/prisoners-dilemma/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "prisoners-dilemma:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "prisoners-dilemma:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "prisoners-dilemma:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/prisoners-dilemma/src/test.ts",
+            "polyfills": "projects/prisoners-dilemma/src/polyfills.ts",
+            "tsConfig": "projects/prisoners-dilemma/tsconfig.spec.json",
+            "karmaConfig": "projects/prisoners-dilemma/karma.conf.js",
+            "assets": [
+              "projects/prisoners-dilemma/src/favicon.ico",
+              "projects/prisoners-dilemma/src/assets"
+            ],
+            "styles": [
+              "projects/prisoners-dilemma/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/prisoners-dilemma/tsconfig.app.json",
+              "projects/prisoners-dilemma/tsconfig.spec.json",
+              "projects/prisoners-dilemma/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/prisoners-dilemma/e2e/protractor.conf.js",
+            "devServerTarget": "prisoners-dilemma:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "prisoners-dilemma:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "ngx-abm"
 }

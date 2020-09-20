@@ -1,0 +1,18 @@
+<h2>Score Table</h2>
+
+<!-- Feed logs into a log file -->
+<!-- Feed raw data (decisions and results) into a log file -->
+<!-- and make it downloadable -->
+<!-- Show strategies in a payoff-winratio-graph (x,y) = (sum of all payoffs, number of "wins")-->
+
+<div *ngIf="scores">
+  <mat-grid-list [cols]="numberOfCols + 1" rowHeight="50px">
+    <mat-grid-tile> Prisoner 1 : Prisoner 2 </mat-grid-tile>
+    <mat-grid-tile *ngFor="let sn of playedStrategies">
+      {{ sn }}
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let s of scores; index as i">
+      {{ s }}
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
