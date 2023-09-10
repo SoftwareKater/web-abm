@@ -8,11 +8,14 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "test:all": "ng test:ngx-abm && ng test:pd",
     "test:ngx-abm": "ng test ngx-abm --code-coverage --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox",
+    "test:pd": "ng test prisoners-dilemma --watch=false --code-coverage",
     "build:all": "npm run build:ngx-abm && npm run build:pd",
     "build:ngx-abm": "ng build ngx-abm --prod",
-    "build:pd": "ng build prisoners-dilemma --prod --base-href='https://softwarekater.github.io/web-abm/'",
-    "publish:demo": "npx angular-cli-ghpages --dir=./dist/prisoners-dilemma"
+    "build:pd": "ng build prisoners-dilemma --prod --base-href='https://softwarekater.github.io/ngx-abm/'",
+    "publish:demo": "npx angular-cli-ghpages --dir=./dist/prisoners-dilemma",
+    "format:check": "prettier --list-different 'projects/**/*.ts'"
   },
   "private": true,
   "dependencies": {
